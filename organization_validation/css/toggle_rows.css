@@ -1,0 +1,16 @@
+.consistent-button {
+    background-color: #3b5998; /* Match Drupal button color */
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+}
+
+.consistent-button:hover {
+    background-color: #2d4373; /* Slightly darker on hover */
+}

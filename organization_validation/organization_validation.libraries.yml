@@ -1,0 +1,19 @@
+confirmation_styles:
+  css:
+    theme:
+      css/confirmation.css: {}
+toggle_rows:
+  version: 1.x
+  css:
+    theme:
+      css/toggle_rows.css: {}
+  js:
+    js/toggle_rows.js: {}
+  dependencies:
+    - core/drupal
+    - core/once
+    - core/jquery
+
+
+
+

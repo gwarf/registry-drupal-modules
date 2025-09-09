@@ -1,0 +1,25 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter().
+ */
+function webform_geonames_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Log that the hook is triggered.
+  \Drupal::logger('webform_geonames')->debug('webform_geonames_form_alter triggered for form_id: @form_id', ['@form_id' => $form_id]);
+
+  // Check if the form ID matches the Webform submission form you are targeting.
+  if ($form_id === 'webform_submission_organisation_registry_add_form') {
+    // Ensure #attached['library'] is initialized as an array.
+    if (!isset($form['#attached']['library']) || !is_array($form['#attached']['library'])) {
+      $form['#attached']['library'] = [];
+    }
+
+    // Attach the JavaScript library to the form.
+    $form['#attached']['library'][] = 'webform_geonames/autocomplete';
+
+    // Log that the library has been attached.
+    \Drupal::logger('webform_geonames')->notice('Library "webform_geonames/autocomplete" attached to the form.');
+  }
+}

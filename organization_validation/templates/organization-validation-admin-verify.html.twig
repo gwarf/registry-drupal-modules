@@ -1,0 +1,32 @@
+{% extends "page.html.twig" %}
+
+{% block content %}
+  <div class="container">
+    <h2>Admin User Verification</h2>
+
+    <h3>User Details</h3>
+    <ul>
+      {% for label, value in user_details %}
+        <li><strong>{{ label }}:</strong> {{ value }}</li>
+      {% endfor %}
+    </ul>
+
+    <h3>Matching Organisation</h3>
+    {% if organisation_details %}
+      <ul>
+        {% for label, value in organisation_details %}
+          <li><strong>{{ label }}:</strong> {{ value }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No matching organisation found.</p>
+    {% endif %}
+
+    <h3>Verify User</h3>
+    {% if verification_form %}
+      {{ verification_form }}
+    {% else %}
+      <p>No verification form available.</p>
+    {% endif %}
+  </div>
+{% endblock %}

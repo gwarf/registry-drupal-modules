@@ -1,0 +1,11 @@
+{% extends "page.html.twig" %}
+
+{% block content %}
+  <div class="confirmation-message">
+    <div class="message-box">
+      <h2>{{ 'Process Completed'|t }}</h2>
+      <p>{{ message }}</p>
+      <a href="/" class="button">{{ 'Return to Home'|t }}</a>
+    </div>
+  </div>
+{% endblock %}

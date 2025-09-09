@@ -1,0 +1,103 @@
+# organization_validation.thank_you_page:
+#   path: '/organization-validation/thank-you'
+#   defaults:
+#     _controller: '\Drupal\organization_validation\Controller\ThankYouController::thankYouPage'
+#     _title: 'Thank You'
+#   requirements:
+#     _permission: 'access content'
+# organization_validation.confirm_page:
+#   path: '/organization-validation/confirm/{org}'
+#   defaults:
+#     _controller: '\Drupal\organization_validation\Controller\OrganizationConfirmController::confirmPage'
+#     _title: 'Confirm Organisation'
+#   requirements:
+#     _permission: 'access content'
+
+# organization_validation.thank_you_page:
+#   path: '/organization-validation/thank-you'
+#   defaults:
+#     _controller: '\Drupal\organization_validation\Controller\ThankYouController::thankYouPage'
+#     _title: 'Thank You'
+#   requirements:
+#     _permission: 'access content'
+
+# organization_validation.thank_you_page:
+#   path: '/organization-validation/thank-you/{uid}'
+#   defaults:
+#     _controller: '\Drupal\organization_validation\Controller\ThankYouController::thankYouPage'
+#     _title: 'Thank You'
+#   requirements:
+#     _permission: 'access content'
+#     uid: \d+ # Ensure uid is numeric
+
+organization_validation.check_organisation:
+  path: '/check-organisation'
+  defaults:
+    _controller: '\Drupal\organization_validation\Controller\OrganizationValidationController::checkOrganisation'
+    _title: 'Organisation Registry'
+  requirements:
+    _permission: 'access content'
+
+organization_validation.confirm_organisation:
+  path: '/confirm-organisation/{organisation}/{user}'
+  defaults:
+    _controller: '\Drupal\organization_validation\Controller\OrganizationValidationController::confirmOrganisation'
+    _title: 'Confirm Organisation'
+  requirements:
+    _permission: 'access content'
+
+organization_validation.create_organisation:
+  path: '/create-organisation/{user}'
+  defaults:
+    _controller: '\Drupal\organization_validation\Controller\OrganizationValidationController::createOrganisation'
+    _title: 'Create Organisation'
+  requirements:
+    _permission: 'access content'
+
+# organization_validation.verify_org_email:
+#   path: '/verify-organisation-email/{uid}/{timestamp}/{hash}'
+#   defaults:
+#     _controller: '\Drupal\organization_validation\Controller\OrganizationValidationController::verifyOrgEmail'
+#     _title: 'Confirm Organisational Email'
+#   requirements:
+#     _permission: 'access content'
+#     uid: '\d+'
+#     timestamp: '\d+'
+#     hash: '.+'
+
+organization_validation.approve_ownership:
+  path: '/approve-ownership/{organisation}/{user}'
+  defaults:
+    _controller: '\Drupal\organization_validation\Controller\OrganizationValidationController::approveOwnership'
+    _title: 'Approve Ownership Request'
+  requirements:
+    _permission: 'access content'
+    #_user_is_logged_in: 'TRUE'  # Only allow logged-in users
+
+organization_validation.confirmation_page:
+  path: '/organization-validation/confirmation'
+  defaults:
+    _controller: '\Drupal\organization_validation\Controller\ConfirmationController::confirmationPage'
+    _title: 'Confirmation'
+  requirements:
+    _permission: 'access content'
+
+# organization_validation.admin_verify_user:
+#   path: '/admin/verify-user/{user}'
+#   defaults:
+#     _controller: '\Drupal\organization_validation\Controller\OrganizationValidationController::adminVerifyUser'
+#     _title: 'User Verification'
+#   requirements:
+#     _permission: 'administer users'
+#   options:
+#     parameters:
+#       user:
+#         type: entity:user
+organization_validation.submit:
+  path: '/organization-validation/manageSelectedOrganisations'
+  defaults:
+    _controller: '\Drupal\organization_validation\Controller\OrganizationValidationController::manageSelectedOrganisation'
+    _title: 'Manage Selected Organisation'
+  requirements:
+    _permission: 'access content'
+  methods: ['POST']

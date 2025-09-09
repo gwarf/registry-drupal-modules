@@ -1,0 +1,18 @@
+<?php
+
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements computed field hook for 'field_map_address'.
+ */
+function computed_field_field_map_address_compute(EntityTypeManagerInterface $entity_type_manager, EntityInterface $entity, array $fields, $delta) {
+  // Retrieve values from entity.
+  $country = $entity->get('field_country')->value ?? '';
+  $city = $entity->get('field_city')->value ?? '';
+
+  // Format the computed address.
+  $combined_address = trim($city . ($city && $country ? ', ' : '') . $country);
+
+  return $combined_address;
+}

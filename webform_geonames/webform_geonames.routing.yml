@@ -1,0 +1,7 @@
+webform_geonames.autocomplete:
+  path: '/webform-geonames/autocomplete'
+  defaults:
+    _controller: '\Drupal\webform_geonames\Controller\GeonamesController::autocomplete'
+    _title: 'Geonames Autocomplete'
+  requirements:
+    _permission: 'access content'

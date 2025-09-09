@@ -1,0 +1,5 @@
+services:
+  organization_validation.workflow_subscriber:
+    class: Drupal\organization_validation\EventSubscriber\WorkflowTransitionSubscriber
+    tags:
+      - { name: event_subscriber }

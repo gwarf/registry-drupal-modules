@@ -1,0 +1,14 @@
+<div class="organization-confirmation">
+  <h2>Hello, {{ user_name }}</h2>
+  <p>We found an existing organisation that matches your details:</p>
+  <p><strong>Organization:</strong> {{ organization_name }}</p>
+  <p><a href="{{ organization_url }}" target="_blank">View Organisation</a></p>
+
+  <form action="{{ organization_url }}" method="get">
+    <button type="submit" name="confirm" value="yes">Yes, this is my organisation</button>
+  </form>
+
+  <form action="/organization-validation/thank-you/{{ uid }}" method="post">
+    <button type="submit" name="confirm" value="no">No, this is not my organisation</button>
+  </form>
+</div>
