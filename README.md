@@ -95,4 +95,8 @@ admin review/confirmation flows with email notifications.
 **Depends on:** `drupal:user`, `drupal:node` (Core 10).
 Additional moderation features are supported via an event subscriber.
 
----
+## Funded by the European Union
+
+This work has been funded by the European Union's Horizon Europe research and
+innovation programme under grant agreement No
+[101058007 (DIAMAS)](https://cordis.europa.eu/project/id/101058007).
