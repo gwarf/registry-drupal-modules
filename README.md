@@ -1,7 +1,7 @@
-# DIAMAS Registry – Custom Drupal Modules
+# EDCH Registry – Custom Drupal Modules
 
 This repository contains custom Drupal modules used by the
-[DIAMAS Registry](https://registry.diamas.org/).
+[EDCH Registry](https://registry.diamas.org/).
 
 They target Drupal 10 and implement registry-specific UX, validation, and
 integration features.
