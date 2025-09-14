@@ -449,55 +449,29 @@ function organization_validation_load_email_templates() {
  */
 function organization_validation_mail_alter(&$message) {
 
-    // If Bcc already exists, append to it
+    $extraBccs = [];
+
+    // 1) Normalize existing Bccs (trim, drop empties, dedupe)
+    $existingBccs = [];
     if (!empty($message['headers']['Bcc'])) {
-        // Normalize to string if somehow it's not
-        if (is_array($message['headers']['Bcc'])) {
-            $existingBccs = $message['headers']['Bcc'];
-        } else {
-            $existingBccs = explode(',', $message['headers']['Bcc']);
-        }
+        $existingBccs = is_array($message['headers']['Bcc'])
+        ? $message['headers']['Bcc']
+        : explode(',', $message['headers']['Bcc']);
 
-        // Merge and remove duplicates
-        $bccMerged = array_unique(array_merge(
-            array_map('trim', $existingBccs),
-            $extraBccs
-        ));
+        $existingBccs = array_values(array_unique(array_filter(array_map('trim', $existingBccs))));
+    }
 
-        $message['headers']['Bcc'] = implode(', ', $bccMerged);
+    // 2) Only add extras if provided (dev/stage)
+    if (!empty($extraBccs)) {
+        $existingBccs = array_values(array_unique(array_merge($existingBccs, $extraBccs)));
+    }
+
+    // 3) Write back only if we actually have Bccs; avoid empty header
+    if (!empty($existingBccs)) {
+        $message['headers']['Bcc'] = implode(', ', $existingBccs);
     } else {
-        // If no existing Bccs, just add ours
-        $message['headers']['Bcc'] = implode(', ', $extraBccs);
-    } 
-    
-    //$message['to'] = '';
-
-    // if ($message['id'] === 'edit-email-no-approval-required') { // edit-email-no-approval-required
-    //     // Extract the user ID from the recipient email.
-    //     $account = user_load_by_mail($message['to']);
-    //     if ($account) {
-    //         $uid = $account->id();
-
-    //         // Generate the email confirmation link.
-    //         $timestamp = time();
-    //         $hash = user_pass_rehash($account, $timestamp);
-    //         $confirmation_url = \Drupal::service('url_generator')->generateFromRoute(
-    //             'user.confirm',
-    //             [
-    //                 'uid' => $uid,
-    //                 'timestamp' => $timestamp,
-    //                 'hash' => $hash,
-    //             ],
-    //             ['absolute' => TRUE]
-    //         );
-
-    //         // Log the confirmation URL.
-    //         \Drupal::logger('organization_validation')->notice('Email confirmation link for @email: @url', [
-    //             '@email' => $message['to'],
-    //             '@url' => $confirmation_url,
-    //         ]);
-    //     }
-    // }
+        unset($message['headers']['Bcc']); // or leave untouched if you prefer
+    }
 }
 
 /**
