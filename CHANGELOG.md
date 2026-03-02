@@ -6,7 +6,7 @@ All notable changes to this repository are documented here.
 
 ### Changed
 
-- Improve mail templates
+- feat: improve mail templates.
 
 ## [1.0.1] – Update contact points to use edch.eu
 
