@@ -10,8 +10,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Handles Organisation Confirmation page.
  */
-class OrganizationConfirmController extends ControllerBase
-{
+class OrganizationConfirmController extends ControllerBase {
   /**
    * The entity type manager.
    */
@@ -20,16 +19,14 @@ class OrganizationConfirmController extends ControllerBase
   /**
    * Constructor.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager)
-  {
+  public function __construct(EntityTypeManagerInterface $entity_type_manager) {
     $this->entityTypeManager = $entity_type_manager;
   }
 
   /**
    * Dependency Injection.
    */
-  public static function create(ContainerInterface $container)
-  {
+  public static function create(ContainerInterface $container) {
     return new static(
       $container->get('entity_type.manager'),
     );
@@ -38,8 +35,7 @@ class OrganizationConfirmController extends ControllerBase
   /**
    * Organisation Confirmation Page.
    */
-  public function confirmPage(RouteMatchInterface $route_match)
-  {
+  public function confirmPage(RouteMatchInterface $route_match) {
     $org_id = $route_match->getParameter('org');
     $organization = $this->entityTypeManager->getStorage('node')->load($org_id);
 
@@ -57,7 +53,8 @@ class OrganizationConfirmController extends ControllerBase
       '#country' => $country,
       '#org_url' => $org_url,
       '#form' => \Drupal::formBuilder()
-       ->getForm('Drupal\organization_validation\Form\ConfirmOrganisationForm', $org_id),
+        ->getForm('Drupal\organization_validation\Form\ConfirmOrganisationForm', $org_id),
     ];
   }
+
 }

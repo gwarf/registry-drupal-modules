@@ -8,15 +8,14 @@ use Drupal\Core\Url;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
-  * Controller for listing published organizations.
-  */
-class OrganizationListingController extends ControllerBase
-{
+ * Controller for listing published organizations.
+ */
+class OrganizationListingController extends ControllerBase {
+
   /**
    * List published organizations with search and filter functionality.
    */
-  public function listorganizations(Request $request)
-  {
+  public function listorganizations(Request $request) {
     $connection = Database::getConnection();
 
     // Get search and filter parameters from the query string.
@@ -25,9 +24,9 @@ class OrganizationListingController extends ControllerBase
 
     // Build the query to fetch organizations.
     $query = $connection->select('node_field_data', 'n')
-     ->fields('n', ['nid', 'title'])
-     ->condition('n.type', 'organizations')
-     ->condition('n.status', 1);
+      ->fields('n', ['nid', 'title'])
+      ->condition('n.type', 'organizations')
+      ->condition('n.status', 1);
 
     // Join to fetch country and IPSP ID.
     $query->join('node__field_country', 'c', 'c.entity_id = n.nid');
@@ -54,9 +53,9 @@ class OrganizationListingController extends ControllerBase
 
     // Fetch distinct countries for the filter dropdown.
     $country_query = $connection->select('node__field_country', 'c')
-     ->distinct()
-     ->fields('c', ['field_country_value'])
-     ->orderBy('field_country_value', 'ASC');
+      ->distinct()
+      ->fields('c', ['field_country_value'])
+      ->orderBy('field_country_value', 'ASC');
     $countries = $country_query->execute()->fetchCol();
 
     // Build the filter and search form.
@@ -109,4 +108,5 @@ class OrganizationListingController extends ControllerBase
 
     return $build;
   }
+
 }

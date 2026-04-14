@@ -5,9 +5,6 @@ namespace Drupal\organization_validation\Plugin\QueueWorker;
 use Drupal\Core\Queue\QueueWorkerBase;
 use Drupal\user\Entity\User;
 use Drupal\Core\Url;
-use Drupal\Core\Mail\MailManagerInterface;
-use Drupal\Core\Logger\LoggerChannelFactoryInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Processes user verification in a queue to avoid database locks.
@@ -18,13 +15,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   cron = {"time" = 60}
  * )
  */
-class UserVerificationQueue extends QueueWorkerBase
-{
+class UserVerificationQueue extends QueueWorkerBase {
+
   /**
    * Processes the queued verification request.
    */
-  public function processItem($data)
-  {
+  public function processItem($data) {
     $user = User::load($data['uid']);
     if (!$user) {
       return;
@@ -37,7 +33,7 @@ class UserVerificationQueue extends QueueWorkerBase
     // ? Generate verification link
     $verification_link = Url::fromRoute('organization_validation.verify_organization', [
       'user' => $user->id(),
-    ], ['absolute' => true])->toString();
+    ], ['absolute' => TRUE])->toString();
 
     // ? Log the verification link
     \Drupal::logger('organization_validation')
@@ -54,8 +50,9 @@ class UserVerificationQueue extends QueueWorkerBase
     $params['message'] = "Your account has been verified and activated. Please verify your organization using this link: $verification_link";
     $params['subject'] = 'Account Verified and Activated - Verify Your Organization';
     $langcode = $user->getPreferredLangcode();
-    $send = true;
+    $send = TRUE;
 
-    $mailManager->mail($module, $key, $to, $langcode, $params, null, $send);
+    $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
   }
+
 }

@@ -2,28 +2,32 @@
 
 namespace Drupal\organization_validation\EventSubscriber;
 
-use Drupal\Core\Mail\MailManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Drupal\workflow\Event\WorkflowTransitionEvent;
-use Drupal\Core\Language\LanguageManagerInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class WorkflowTransitionSubscriber implements EventSubscriberInterface
-{
-  public static function getSubscribedEvents()
-  {
+/**
+ *
+ */
+class WorkflowTransitionSubscriber implements EventSubscriberInterface {
+
+  /**
+   *
+   */
+  public static function getSubscribedEvents() {
     return [
-    'workflow.transition' => 'onWorkflowTransition',
+      'workflow.transition' => 'onWorkflowTransition',
     ];
   }
 
-  public function onWorkflowTransition(WorkflowTransitionEvent $event)
-  {
+  /**
+   *
+   */
+  public function onWorkflowTransition(WorkflowTransitionEvent $event) {
     $transition = $event->getTransition();
     $entity = $event->getEntity();
 
     \Drupal::logger('organization_validation')->debug('Node is published 0');
-    // Check if this is an Organization entity being published
+    // Check if this is an Organization entity being published.
     if ($entity->getEntityTypeId() === 'node' && $entity->bundle() === 'organization') {
       \Drupal::logger('organization_validation')->debug('Node is published 1');
       if ($transition->getToState()->isPublished()) {
@@ -38,10 +42,10 @@ class WorkflowTransitionSubscriber implements EventSubscriberInterface
         // $params['message'] = "The organization '" . $entity->label() . "' has been published.";
         // $langcode = \Drupal::currentUser()->getPreferredLangcode();
         // $send = true;
-
         // // Send email
         // $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
       }
     }
   }
+
 }

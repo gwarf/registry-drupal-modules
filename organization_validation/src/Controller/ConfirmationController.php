@@ -9,8 +9,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 /**
  * Provides a confirmation page for the organization validation workflow.
  */
-class ConfirmationController extends ControllerBase
-{
+class ConfirmationController extends ControllerBase {
   /**
    * The request stack service.
    *
@@ -24,16 +23,14 @@ class ConfirmationController extends ControllerBase
    * @param \Symfony\Component\HttpFoundation\RequestStack $request_stack
    *   The request stack service.
    */
-  public function __construct(RequestStack $request_stack)
-  {
+  public function __construct(RequestStack $request_stack) {
     $this->requestStack = $request_stack;
   }
 
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container)
-  {
+  public static function create(ContainerInterface $container) {
     return new static(
       $container->get('request_stack'),
     );
@@ -45,8 +42,7 @@ class ConfirmationController extends ControllerBase
    * @return array
    *   Render array for the confirmation page.
    */
-  public function confirmationPage()
-  {
+  public function confirmationPage() {
     $request = $this->requestStack->getCurrentRequest();
     $message = $request->query->get('message', $this->t('An unexpected error occurred.'));
 
@@ -66,4 +62,5 @@ class ConfirmationController extends ControllerBase
       ],
     ];
   }
+
 }
