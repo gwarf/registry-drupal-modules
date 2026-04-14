@@ -47,4 +47,4 @@ jobs:
         run: composer install --no-interaction --no-progress
 
       - name: Run phpstan
-        run: vendor/bin/phpstan analyse --no-progress
+        run: vendor/bin/phpstan analyze --configuration=.github/linters/phpstan.neon.dist .
