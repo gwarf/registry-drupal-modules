@@ -1,5 +1,7 @@
 DISABLE: COPYPASTE,SPELL
-ADDITIONAL_EXCLUDED_DIRECTORIES: "/vendor/"
+ADDITIONAL_EXCLUDED_DIRECTORIES: "vendor"
+
+REPOSITORY_CHECKOV_ARGUMENTS: "--skip-path 'vendor/*'"
 
 PHP_PHPSTAN_PRE_COMMANDS:
   - command: composer install --no-interaction --no-progress
