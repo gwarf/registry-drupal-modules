@@ -1,7 +1,8 @@
+---
 autocomplete:
   version: 1.x
   js:
-    js/webform_geonames_autocomplete.js: {version: '1.0.1'}
+    js/webform_geonames_autocomplete.js: { version: "1.0.1" }
   dependencies:
     - core/jquery
     - core/drupal
