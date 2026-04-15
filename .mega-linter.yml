@@ -27,6 +27,10 @@ ADDITIONAL_EXCLUDED_DIRECTORIES:
   - vendor/
   - core/
 
+JAVASCRIPT_ES_PRE_COMMANDS:
+  - command: npm install eslint-plugin-yml
+    cwd: root
+
 PHP_PHPSTAN_PRE_COMMANDS:
   - command: composer install --no-interaction --no-progress --ignore-platform-reqs
     cwd: workspace
