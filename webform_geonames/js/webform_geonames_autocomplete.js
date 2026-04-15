@@ -102,8 +102,12 @@ document.addEventListener("DOMContentLoaded", function () {
         suggestionItem.style.padding = "8px";
         suggestionItem.style.cursor = "pointer";
         suggestionItem.style.transition = "background-color 0.2s ease";
-        suggestionItem.addEventListener("mouseenter", () => (suggestionItem.style.backgroundColor = "#f5f5f5"));
-        suggestionItem.addEventListener("mouseleave", () => (suggestionItem.style.backgroundColor = "white"));
+        suggestionItem.addEventListener("mouseenter",
+          () => (suggestionItem.style.backgroundColor = "#f5f5f5")
+        );
+        suggestionItem.addEventListener("mouseleave",
+          () => (suggestionItem.style.backgroundColor = "white")
+        );
 
         suggestionItem.addEventListener("click", () => {
           cityField.value = city.label;
@@ -127,7 +131,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Hide suggestions dropdown
   function hideSuggestions(cityField) {
-    const suggestionContainer = document.querySelector(`#city-suggestions-${cityField.dataset.id}`);
+    const suggestionContainer = document.querySelector(
+      `#city-suggestions-${cityField.dataset.id}`
+    );
     if (suggestionContainer) {
       suggestionContainer.innerHTML = "";
     }
@@ -136,7 +142,13 @@ document.addEventListener("DOMContentLoaded", function () {
   // Close suggestions when clicking outside
   document.addEventListener("click", function (event) {
     document.querySelectorAll(".city-suggestions").forEach(container => {
-      if (!container.contains(event.target) && !document.querySelector(`[data-id="${container.id.replace("city-suggestions-", "")}"]`)?.contains(event.target)) {
+      if (!container.contains(event.target) &&
+        !document
+        .querySelector(
+          `[data-id="${container.id.replace("city-suggestions-", "")}"]`
+        )
+        ?.contains(event.target)
+      ) {
         container.innerHTML = "";
       }
     });
@@ -163,9 +175,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Assign unique IDs to city fields
   function assignCityFieldIds() {
-    document.querySelectorAll(".webform-city-autocomplete").forEach((input, index) => {
-      input.dataset.id = index;
-    });
+    document.querySelectorAll(".webform-city-autocomplete")
+      .forEach((input, index) => {
+        input.dataset.id = index;
+      });
   }
 
   // Observe dynamically added city fields
@@ -173,7 +186,9 @@ document.addEventListener("DOMContentLoaded", function () {
     mutations.forEach(mutation => {
       mutation.addedNodes.forEach(node => {
         if (node.nodeType === 1) {
-          const newCityFields = node.querySelectorAll(".webform-city-autocomplete");
+          const newCityFields = node.querySelectorAll(
+            ".webform-city-autocomplete"
+          );
           newCityFields.forEach(attachAutocomplete);
         }
       });
