@@ -4,7 +4,7 @@
       once(
         "radioSelection",
         $('input[name="selected_organisation"]', context)
-        ).forEach((radio) => {
+      ).forEach((radio) => {
         $(radio).on("change", function () {
           if ($('input[name="selected_organisation"]:checked').length > 0) {
             $(".action-button-2").fadeIn(); // Show button
